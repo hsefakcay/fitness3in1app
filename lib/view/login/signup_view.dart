@@ -4,6 +4,8 @@ import 'package:fitness_ai_app/view/login/complete_profile_view.dart';
 import 'package:fitness_ai_app/view/login/login_view.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
 
@@ -24,7 +26,8 @@ class _SignUpViewState extends State<SignUpView> {
   }
 
   bool isValidPassword(String password) {
-    return password.length >= 6; // Change this to your password validation logic
+    return password.length >=
+        6; // Change this to your password validation logic
   }
 
   @override
@@ -45,7 +48,10 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 Text(
                   "Create an Account",
-                  style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                      color: TColor.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
                   height: media.width * 0.05,
@@ -123,11 +129,13 @@ class _SignUpViewState extends State<SignUpView> {
                   height: media.width * 0.4,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    if (_firstNameController.text.isEmpty || _lastNameController.text.isEmpty) {
+                  onPressed: () async {
+                    if (_firstNameController.text.isEmpty ||
+                        _lastNameController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Please fill in your first and last name.'),
+                          content:
+                              Text('Please fill in your first and last name.'),
                         ),
                       );
                       return;
@@ -145,7 +153,8 @@ class _SignUpViewState extends State<SignUpView> {
                     if (!isValidPassword(_passwordController.text)) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Please enter a password with at least 6 characters.'),
+                          content: Text(
+                              'Please enter a password with at least 6 characters.'),
                         ),
                       );
                       return;
@@ -159,7 +168,23 @@ class _SignUpViewState extends State<SignUpView> {
                       );
                       return;
                     }
-                    // If all validations pass, proceed with registration
+
+                    // Check if email exists in the database
+                    final QuerySnapshot<Map<String, dynamic>> result =
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .where('mail', isEqualTo: _emailController.text)
+                            .get();
+
+                    if (result.docs.isNotEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('This email is already registered.'),
+                        ),
+                      );
+                      return;
+                    }
+                    // Proceed with registration
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -249,7 +274,10 @@ class _SignUpViewState extends State<SignUpView> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginView()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginView()));
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -263,7 +291,10 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                       Text(
                         "Login",
-                        style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: TColor.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700),
                       )
                     ],
                   ),
