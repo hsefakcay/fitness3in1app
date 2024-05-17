@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1034857993520",
+    "project_id": "fitnessaiapp-99781",
+    "storage_bucket": "fitnessaiapp-99781.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034857993520:android:e2ec88c1278b10aa3924f5",
+        "android_client_info": {
+          "package_name": "com.example.hsefakcay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS24qN6XvsYGBaZDOxEa56XzWya2u2aaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
