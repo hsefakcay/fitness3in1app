@@ -6,11 +6,68 @@ import 'package:fitness_ai_app/view/on_boarding/started_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../data/repo/user_repository.dart';
+import '../data/model/user.dart';
+
+import 'package:firebase_auth/firebase_auth.dart' as auth;
+
+void checkAuthentication() {
+  auth.FirebaseAuth authInstance = auth.FirebaseAuth.instance;
+  auth.User? user = authInstance.currentUser;
+
+  if (user != null) {
+    // User is signed in.
+    print('User is signed in.');
+  } else {
+    // No user is signed in.
+    print('No user is signed in.');
+  }
+}
+
+void signInWithEmailAndPassword(String email, String password) async {
+  try {
+    auth.UserCredential userCredential =
+        await auth.FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    auth.User? user = userCredential.user;
+    print('User signed in: ${user?.email}');
+  } catch (e) {
+    print('Failed to sign in: $e');
+  }
+}
+
 Future<void> main() async {
+  signInWithEmailAndPassword('buraya mail', "buraya şifreni yaz");
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  UserRepository userRepository = UserRepository();
+  // Example usage
+  User newUser = User(
+    id: '1234',
+    name: 'John',
+    surname: 'Doe',
+    mail: 'john.doe@example.com',
+    password: 'password123',
+    age: 25,
+    gender: 'Male',
+    height: 180.0,
+    weight: 75.0,
+    programType: 'Fitness',
+  );
+
+  // Add user
+  await userRepository.addUser(newUser);
+
+  checkAuthentication();
+  // Get user
+  User? fetchedUser = await userRepository.getUserById('123');
+  print('Fetched user: ${fetchedUser?.name}');
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
