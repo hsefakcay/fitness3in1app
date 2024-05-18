@@ -155,7 +155,7 @@ class _HomeViewState extends State<HomeView> {
                           style: TextStyle(color: TColor.gray, fontSize: 12),
                         ),
                         Text(
-                          "${_userProvider.user?.name} ${_userProvider.user?.surname}",
+                          "${_userProvider.user?.name.toUpperCase()} ${_userProvider.user?.surname.toUpperCase()}",
                           style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
                         ),
                       ],
