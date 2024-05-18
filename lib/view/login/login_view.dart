@@ -110,7 +110,8 @@ class _LoginViewState extends State<LoginView> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => WelcomeView(user: user),
+                            builder: (context) =>
+                                WelcomeView(user: user, fromWelcomeView: false),
                           ),
                         );
                       } else {

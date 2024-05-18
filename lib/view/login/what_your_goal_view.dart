@@ -152,8 +152,8 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                WelcomeView(user: widget.user),
+                            builder: (context) => WelcomeView(
+                                user: widget.user, fromWelcomeView: true),
                           ),
                         );
                       }),
