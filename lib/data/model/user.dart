@@ -10,6 +10,12 @@ class User {
   double weight;
   String programType;
 
+  // Calculate age based on birth year
+  int get ageYear {
+    final currentYear = DateTime.now().year;
+    return currentYear - age;
+  }
+
   User({
     required this.id,
     required this.name,
@@ -47,7 +53,7 @@ class User {
       'surname': surname,
       'mail': mail,
       'password': password,
-      'age': age,
+      'age': ageYear,
       'gender': gender,
       'height': height,
       'weight': weight,

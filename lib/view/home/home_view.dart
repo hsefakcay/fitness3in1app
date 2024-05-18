@@ -40,28 +40,30 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
+  User? fetchUser() {
+    return _userProvider.user;
+  }
+
+  double calculateBMI() {
+    return _userProvider.user!.weight / ((_userProvider.user?.height)! / 100 * (_userProvider.user!.height) / 100);
+  }
+
+  String getBMICategory(double bmi) {
+    if (bmi < 18.5) {
+      return 'Underweight';
+    } else if (bmi < 24.9) {
+      return 'normal weight';
+    } else if (bmi < 29.9) {
+      return 'Overweight';
+    } else {
+      return 'Obesity';
+    }
+  }
+
   List lastWorkoutArr = [
-    {
-      "name": "Full Body Workout",
-      "image": "assets/img/Workout1.png",
-      "kcal": "180",
-      "time": "20",
-      "progress": 0.3
-    },
-    {
-      "name": "Lower Body Workout",
-      "image": "assets/img/Workout2.png",
-      "kcal": "200",
-      "time": "30",
-      "progress": 0.4
-    },
-    {
-      "name": "Ab Workout",
-      "image": "assets/img/Workout3.png",
-      "kcal": "300",
-      "time": "40",
-      "progress": 0.7
-    },
+    {"name": "Full Body Workout", "image": "assets/img/Workout1.png", "kcal": "180", "time": "20", "progress": 0.3},
+    {"name": "Lower Body Workout", "image": "assets/img/Workout2.png", "kcal": "200", "time": "30", "progress": 0.4},
+    {"name": "Ab Workout", "image": "assets/img/Workout3.png", "kcal": "300", "time": "40", "progress": 0.7},
   ];
   List<int> showingTooltipOnSpots = [21];
 
@@ -154,10 +156,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                         Text(
                           "${_userProvider.user?.name} ${_userProvider.user?.surname}",
-                          style: TextStyle(
-                              color: TColor.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
+                          style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -194,8 +193,7 @@ class _HomeViewState extends State<HomeView> {
                       fit: BoxFit.fitHeight,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 25, horizontal: 25),
+                      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -205,16 +203,11 @@ class _HomeViewState extends State<HomeView> {
                             children: [
                               Text(
                                 "BMI (Body Mass Index)",
-                                style: TextStyle(
-                                    color: TColor.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
+                                style: TextStyle(color: TColor.white, fontSize: 14, fontWeight: FontWeight.w700),
                               ),
                               Text(
-                                "You have a normal weight",
-                                style: TextStyle(
-                                    color: TColor.white.withOpacity(0.7),
-                                    fontSize: 12),
+                                "You have a ${getBMICategory(calculateBMI())}",
+                                style: TextStyle(color: TColor.white.withOpacity(0.7), fontSize: 12),
                               ),
                               SizedBox(
                                 height: media.width * 0.05,
@@ -235,8 +228,7 @@ class _HomeViewState extends State<HomeView> {
                             child: PieChart(
                               PieChartData(
                                 pieTouchData: PieTouchData(
-                                  touchCallback:
-                                      (FlTouchEvent event, pieTouchResponse) {},
+                                  touchCallback: (FlTouchEvent event, pieTouchResponse) {},
                                 ),
                                 startDegreeOffset: 250,
                                 borderData: FlBorderData(
@@ -257,8 +249,7 @@ class _HomeViewState extends State<HomeView> {
                   height: media.width * 0.05,
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   decoration: BoxDecoration(
                     color: TColor.primaryColor2.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(15),
@@ -268,10 +259,7 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       Text(
                         "Today Target",
-                        style: TextStyle(
-                            color: TColor.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700),
+                        style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w700),
                       ),
                       SizedBox(
                         width: 70,
@@ -285,8 +273,7 @@ class _HomeViewState extends State<HomeView> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const ActivityTrackerView(),
+                                builder: (context) => const ActivityTrackerView(),
                               ),
                             );
                           },
@@ -300,10 +287,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 Text(
                   "Activity Status",
-                  style: TextStyle(
-                      color: TColor.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700),
+                  style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
                   height: media.width * 0.02,
@@ -321,8 +305,7 @@ class _HomeViewState extends State<HomeView> {
                       alignment: Alignment.topLeft,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
@@ -330,10 +313,7 @@ class _HomeViewState extends State<HomeView> {
                             children: [
                               Text(
                                 "Heart Rate",
-                                style: TextStyle(
-                                    color: TColor.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700),
+                                style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                               ),
                               ShaderMask(
                                 blendMode: BlendMode.srcIn,
@@ -342,15 +322,12 @@ class _HomeViewState extends State<HomeView> {
                                           colors: TColor.primaryG,
                                           begin: Alignment.centerLeft,
                                           end: Alignment.centerRight)
-                                      .createShader(Rect.fromLTRB(
-                                          0, 0, bounds.width, bounds.height));
+                                      .createShader(Rect.fromLTRB(0, 0, bounds.width, bounds.height));
                                 },
                                 child: Text(
                                   "78 BPM",
                                   style: TextStyle(
-                                      color: TColor.white.withOpacity(0.7),
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 18),
+                                      color: TColor.white.withOpacity(0.7), fontWeight: FontWeight.w700, fontSize: 18),
                                 ),
                               ),
                             ],
@@ -358,8 +335,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                         LineChart(
                           LineChartData(
-                            showingTooltipIndicators:
-                                showingTooltipOnSpots.map((index) {
+                            showingTooltipIndicators: showingTooltipOnSpots.map((index) {
                               return ShowingTooltipIndicators([
                                 LineBarSpot(
                                   tooltipsOnBar,
@@ -371,32 +347,25 @@ class _HomeViewState extends State<HomeView> {
                             lineTouchData: LineTouchData(
                               enabled: true,
                               handleBuiltInTouches: false,
-                              touchCallback: (FlTouchEvent event,
-                                  LineTouchResponse? response) {
-                                if (response == null ||
-                                    response.lineBarSpots == null) {
+                              touchCallback: (FlTouchEvent event, LineTouchResponse? response) {
+                                if (response == null || response.lineBarSpots == null) {
                                   return;
                                 }
                                 if (event is FlTapUpEvent) {
-                                  final spotIndex =
-                                      response.lineBarSpots!.first.spotIndex;
+                                  final spotIndex = response.lineBarSpots!.first.spotIndex;
                                   showingTooltipOnSpots.clear();
                                   setState(() {
                                     showingTooltipOnSpots.add(spotIndex);
                                   });
                                 }
                               },
-                              mouseCursorResolver: (FlTouchEvent event,
-                                  LineTouchResponse? response) {
-                                if (response == null ||
-                                    response.lineBarSpots == null) {
+                              mouseCursorResolver: (FlTouchEvent event, LineTouchResponse? response) {
+                                if (response == null || response.lineBarSpots == null) {
                                   return SystemMouseCursors.basic;
                                 }
                                 return SystemMouseCursors.click;
                               },
-                              getTouchedSpotIndicator:
-                                  (LineChartBarData barData,
-                                      List<int> spotIndexes) {
+                              getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
                                 return spotIndexes.map((index) {
                                   return TouchedSpotIndicatorData(
                                     FlLine(
@@ -404,9 +373,7 @@ class _HomeViewState extends State<HomeView> {
                                     ),
                                     FlDotData(
                                       show: true,
-                                      getDotPainter:
-                                          (spot, percent, barData, index) =>
-                                              FlDotCirclePainter(
+                                      getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
                                         radius: 3,
                                         color: Colors.white,
                                         strokeWidth: 3,
@@ -418,8 +385,7 @@ class _HomeViewState extends State<HomeView> {
                               },
                               touchTooltipData: LineTouchTooltipData(
                                 tooltipRoundedRadius: 20,
-                                getTooltipItems:
-                                    (List<LineBarSpot> lineBarsSpot) {
+                                getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
                                   return lineBarsSpot.map((lineBarSpot) {
                                     return LineTooltipItem(
                                       "${lineBarSpot.x.toInt()} mins ago",
@@ -460,14 +426,11 @@ class _HomeViewState extends State<HomeView> {
                     Expanded(
                       child: Container(
                         height: media.width * 0.95,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 25, horizontal: 20),
+                        padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(25),
-                            boxShadow: const [
-                              BoxShadow(color: Colors.black12, blurRadius: 2)
-                            ]),
+                            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]),
                         child: Row(
                           children: [
                             SimpleAnimationProgressBar(
@@ -481,9 +444,7 @@ class _HomeViewState extends State<HomeView> {
                               duration: const Duration(seconds: 3),
                               borderRadius: BorderRadius.circular(15),
                               gradientColor: LinearGradient(
-                                  colors: TColor.primaryG,
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter),
+                                  colors: TColor.primaryG, begin: Alignment.bottomCenter, end: Alignment.topCenter),
                             ),
                             const SizedBox(
                               width: 10,
@@ -494,10 +455,7 @@ class _HomeViewState extends State<HomeView> {
                               children: [
                                 Text(
                                   "Water Intake",
-                                  style: TextStyle(
-                                      color: TColor.black,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700),
+                                  style: TextStyle(color: TColor.black, fontSize: 12, fontWeight: FontWeight.w700),
                                 ),
                                 ShaderMask(
                                   blendMode: BlendMode.srcIn,
@@ -506,8 +464,7 @@ class _HomeViewState extends State<HomeView> {
                                             colors: TColor.primaryG,
                                             begin: Alignment.centerLeft,
                                             end: Alignment.centerRight)
-                                        .createShader(Rect.fromLTRB(
-                                            0, 0, bounds.width, bounds.height));
+                                        .createShader(Rect.fromLTRB(0, 0, bounds.width, bounds.height));
                                   },
                                   child: Text(
                                     "4 Liters",
@@ -532,35 +489,26 @@ class _HomeViewState extends State<HomeView> {
                                   children: waterArr.map((wObj) {
                                     var isLast = wObj == waterArr.last;
                                     return Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4),
+                                              margin: const EdgeInsets.symmetric(vertical: 4),
                                               width: 10,
                                               height: 10,
                                               decoration: BoxDecoration(
-                                                color: TColor.secondaryColor1
-                                                    .withOpacity(0.5),
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
+                                                color: TColor.secondaryColor1.withOpacity(0.5),
+                                                borderRadius: BorderRadius.circular(5),
                                               ),
                                             ),
                                             if (!isLast)
                                               DottedDashedLine(
                                                   height: media.width * 0.078,
                                                   width: 0,
-                                                  dashColor: TColor
-                                                      .secondaryColor1
-                                                      .withOpacity(0.5),
+                                                  dashColor: TColor.secondaryColor1.withOpacity(0.5),
                                                   axis: Axis.vertical)
                                           ],
                                         ),
@@ -568,10 +516,8 @@ class _HomeViewState extends State<HomeView> {
                                           width: 10,
                                         ),
                                         Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               wObj["title"].toString(),
@@ -584,24 +530,14 @@ class _HomeViewState extends State<HomeView> {
                                               blendMode: BlendMode.srcIn,
                                               shaderCallback: (bounds) {
                                                 return LinearGradient(
-                                                        colors:
-                                                            TColor.secondaryG,
-                                                        begin: Alignment
-                                                            .centerLeft,
-                                                        end: Alignment
-                                                            .centerRight)
-                                                    .createShader(Rect.fromLTRB(
-                                                        0,
-                                                        0,
-                                                        bounds.width,
-                                                        bounds.height));
+                                                        colors: TColor.secondaryG,
+                                                        begin: Alignment.centerLeft,
+                                                        end: Alignment.centerRight)
+                                                    .createShader(Rect.fromLTRB(0, 0, bounds.width, bounds.height));
                                               },
                                               child: Text(
                                                 wObj["subtitle"].toString(),
-                                                style: TextStyle(
-                                                    color: TColor.white
-                                                        .withOpacity(0.7),
-                                                    fontSize: 12),
+                                                style: TextStyle(color: TColor.white.withOpacity(0.7), fontSize: 12),
                                               ),
                                             ),
                                           ],
@@ -627,47 +563,34 @@ class _HomeViewState extends State<HomeView> {
                         Container(
                           width: double.maxFinite,
                           height: media.width * 0.45,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 25, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(25),
-                              boxShadow: const [
-                                BoxShadow(color: Colors.black12, blurRadius: 2)
-                              ]),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Sleep",
-                                  style: TextStyle(
-                                      color: TColor.black,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                ShaderMask(
-                                  blendMode: BlendMode.srcIn,
-                                  shaderCallback: (bounds) {
-                                    return LinearGradient(
-                                            colors: TColor.primaryG,
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight)
-                                        .createShader(Rect.fromLTRB(
-                                            0, 0, bounds.width, bounds.height));
-                                  },
-                                  child: Text(
-                                    "8h 20m",
-                                    style: TextStyle(
-                                        color: TColor.white.withOpacity(0.7),
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                const Spacer(),
-                                Image.asset("assets/img/sleep_grap.png",
-                                    width: double.maxFinite,
-                                    fit: BoxFit.fitWidth)
-                              ]),
+                              boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]),
+                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                            Text(
+                              "Sleep",
+                              style: TextStyle(color: TColor.black, fontSize: 12, fontWeight: FontWeight.w700),
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) {
+                                return LinearGradient(
+                                        colors: TColor.primaryG,
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight)
+                                    .createShader(Rect.fromLTRB(0, 0, bounds.width, bounds.height));
+                              },
+                              child: Text(
+                                "8h 20m",
+                                style: TextStyle(
+                                    color: TColor.white.withOpacity(0.7), fontWeight: FontWeight.w700, fontSize: 14),
+                              ),
+                            ),
+                            const Spacer(),
+                            Image.asset("assets/img/sleep_grap.png", width: double.maxFinite, fit: BoxFit.fitWidth)
+                          ]),
                         ),
                         SizedBox(
                           height: media.width * 0.05,
@@ -675,84 +598,69 @@ class _HomeViewState extends State<HomeView> {
                         Container(
                           width: double.maxFinite,
                           height: media.width * 0.45,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 25, horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(25),
-                              boxShadow: const [
-                                BoxShadow(color: Colors.black12, blurRadius: 2)
-                              ]),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Calories",
-                                  style: TextStyle(
-                                      color: TColor.black,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                ShaderMask(
-                                  blendMode: BlendMode.srcIn,
-                                  shaderCallback: (bounds) {
-                                    return LinearGradient(
-                                            colors: TColor.primaryG,
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight)
-                                        .createShader(Rect.fromLTRB(
-                                            0, 0, bounds.width, bounds.height));
-                                  },
-                                  child: Text(
-                                    "760 kCal",
-                                    style: TextStyle(
-                                        color: TColor.white.withOpacity(0.7),
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 14),
-                                  ),
-                                ),
-                                const Spacer(),
-                                Container(
+                              boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)]),
+                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                            Text(
+                              "Calories",
+                              style: TextStyle(color: TColor.black, fontSize: 12, fontWeight: FontWeight.w700),
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) {
+                                return LinearGradient(
+                                        colors: TColor.primaryG,
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight)
+                                    .createShader(Rect.fromLTRB(0, 0, bounds.width, bounds.height));
+                              },
+                              child: Text(
+                                "760 kCal",
+                                style: TextStyle(
+                                    color: TColor.white.withOpacity(0.7), fontWeight: FontWeight.w700, fontSize: 14),
+                              ),
+                            ),
+                            const Spacer(),
+                            Container(
+                              alignment: Alignment.center,
+                              child: SizedBox(
+                                width: media.width * 0.2,
+                                height: media.width * 0.2,
+                                child: Stack(
                                   alignment: Alignment.center,
-                                  child: SizedBox(
-                                    width: media.width * 0.2,
-                                    height: media.width * 0.2,
-                                    child: Stack(
+                                  children: [
+                                    Container(
+                                      width: media.width * 0.15,
+                                      height: media.width * 0.15,
                                       alignment: Alignment.center,
-                                      children: [
-                                        Container(
-                                          width: media.width * 0.15,
-                                          height: media.width * 0.15,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                                colors: TColor.primaryG),
-                                            borderRadius: BorderRadius.circular(
-                                                media.width * 0.075),
-                                          ),
-                                          child: FittedBox(
-                                            child: Text(
-                                              "230kCal\nleft",
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: TColor.white,
-                                                  fontSize: 11),
-                                            ),
-                                          ),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(colors: TColor.primaryG),
+                                        borderRadius: BorderRadius.circular(media.width * 0.075),
+                                      ),
+                                      child: FittedBox(
+                                        child: Text(
+                                          "230kCal\nleft",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(color: TColor.white, fontSize: 11),
                                         ),
-                                        SimpleCircularProgressBar(
-                                          progressStrokeWidth: 10,
-                                          backStrokeWidth: 10,
-                                          progressColors: TColor.primaryG,
-                                          backColor: Colors.grey.shade100,
-                                          valueNotifier: ValueNotifier(50),
-                                          startAngle: -180,
-                                        ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ]),
+                                    SimpleCircularProgressBar(
+                                      progressStrokeWidth: 10,
+                                      backStrokeWidth: 10,
+                                      progressColors: TColor.primaryG,
+                                      backColor: Colors.grey.shade100,
+                                      valueNotifier: ValueNotifier(50),
+                                      startAngle: -180,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ]),
                         ),
                       ],
                     ))
@@ -766,10 +674,7 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Text(
                       "Workout Progress",
-                      style: TextStyle(
-                          color: TColor.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700),
+                      style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                     Container(
                         height: 30,
@@ -785,8 +690,7 @@ class _HomeViewState extends State<HomeView> {
                                       value: name,
                                       child: Text(
                                         name,
-                                        style: TextStyle(
-                                            color: TColor.gray, fontSize: 14),
+                                        style: TextStyle(color: TColor.gray, fontSize: 14),
                                       ),
                                     ))
                                 .toList(),
@@ -795,8 +699,7 @@ class _HomeViewState extends State<HomeView> {
                             hint: Text(
                               "Weekly",
                               textAlign: TextAlign.center,
-                              style:
-                                  TextStyle(color: TColor.white, fontSize: 12),
+                              style: TextStyle(color: TColor.white, fontSize: 12),
                             ),
                           ),
                         )),
@@ -811,8 +714,7 @@ class _HomeViewState extends State<HomeView> {
                     width: double.maxFinite,
                     child: LineChart(
                       LineChartData(
-                        showingTooltipIndicators:
-                            showingTooltipOnSpots.map((index) {
+                        showingTooltipIndicators: showingTooltipOnSpots.map((index) {
                           return ShowingTooltipIndicators([
                             LineBarSpot(
                               tooltipsOnBar,
@@ -824,31 +726,25 @@ class _HomeViewState extends State<HomeView> {
                         lineTouchData: LineTouchData(
                           enabled: true,
                           handleBuiltInTouches: false,
-                          touchCallback: (FlTouchEvent event,
-                              LineTouchResponse? response) {
-                            if (response == null ||
-                                response.lineBarSpots == null) {
+                          touchCallback: (FlTouchEvent event, LineTouchResponse? response) {
+                            if (response == null || response.lineBarSpots == null) {
                               return;
                             }
                             if (event is FlTapUpEvent) {
-                              final spotIndex =
-                                  response.lineBarSpots!.first.spotIndex;
+                              final spotIndex = response.lineBarSpots!.first.spotIndex;
                               showingTooltipOnSpots.clear();
                               setState(() {
                                 showingTooltipOnSpots.add(spotIndex);
                               });
                             }
                           },
-                          mouseCursorResolver: (FlTouchEvent event,
-                              LineTouchResponse? response) {
-                            if (response == null ||
-                                response.lineBarSpots == null) {
+                          mouseCursorResolver: (FlTouchEvent event, LineTouchResponse? response) {
+                            if (response == null || response.lineBarSpots == null) {
                               return SystemMouseCursors.basic;
                             }
                             return SystemMouseCursors.click;
                           },
-                          getTouchedSpotIndicator: (LineChartBarData barData,
-                              List<int> spotIndexes) {
+                          getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
                             return spotIndexes.map((index) {
                               return TouchedSpotIndicatorData(
                                 FlLine(
@@ -856,9 +752,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                                 FlDotData(
                                   show: true,
-                                  getDotPainter:
-                                      (spot, percent, barData, index) =>
-                                          FlDotCirclePainter(
+                                  getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
                                     radius: 3,
                                     color: Colors.white,
                                     strokeWidth: 3,
@@ -925,19 +819,13 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Text(
                       "Latest Workout",
-                      style: TextStyle(
-                          color: TColor.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700),
+                      style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                     TextButton(
                       onPressed: () {},
                       child: Text(
                         "See More",
-                        style: TextStyle(
-                            color: TColor.gray,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700),
+                        style: TextStyle(color: TColor.gray, fontSize: 14, fontWeight: FontWeight.w700),
                       ),
                     )
                   ],
@@ -954,8 +842,7 @@ class _HomeViewState extends State<HomeView> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const FinishedWorkoutView(),
+                                builder: (context) => const FinishedWorkoutView(),
                               ),
                             );
                           },
@@ -982,21 +869,18 @@ class _HomeViewState extends State<HomeView> {
           case 0:
             return PieChartSectionData(
                 color: color0,
-                value: 33,
+                value: calculateBMI().toDouble(),
                 title: '',
                 radius: 55,
                 titlePositionPercentageOffset: 0.55,
-                badgeWidget: const Text(
-                  "20,1",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700),
+                badgeWidget: Text(
+                  "${calculateBMI().toStringAsFixed(2)}",
+                  style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700),
                 ));
           case 1:
             return PieChartSectionData(
               color: Colors.white,
-              value: 75,
+              value: 100 - calculateBMI().toDouble(),
               title: '',
               radius: 45,
               titlePositionPercentageOffset: 0.55,
