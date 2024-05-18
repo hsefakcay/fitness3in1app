@@ -5,6 +5,8 @@ import 'package:fitness_ai_app/view/login/login_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../data/model/user.dart';
+import 'package:uuid/uuid.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -184,11 +186,28 @@ class _SignUpViewState extends State<SignUpView> {
                       );
                       return;
                     }
+
+                    // Generate a unique ID
+                    String id = Uuid().v4();
+                    // Create a User object with the generated ID
+                    User user = User(
+                      id: id,
+                      name: _firstNameController.text,
+                      surname: _lastNameController.text,
+                      mail: _emailController.text,
+                      password: _passwordController.text,
+                      age: 0, // Set the actual age value if available
+                      gender: '', // Set the actual gender value if available
+                      height: 0.0, // Set the actual height value if available
+                      weight: 0.0, // Set the actual weight value if available
+                      programType:
+                          '', // Set the actual program type value if available
+                    );
                     // Proceed with registration
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const CompleteProfileView(),
+                        builder: (context) => CompleteProfileView(user: user),
                       ),
                     );
                   },

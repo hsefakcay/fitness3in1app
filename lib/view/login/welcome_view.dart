@@ -3,15 +3,23 @@ import 'package:flutter/material.dart';
 import '../../common/colo_extension.dart';
 import '../../common_widget/round_button.dart';
 import '../main_tab/main_tab_view.dart';
+import '../../data/model/user.dart';
+import '../../data/repo/user_repository.dart';
 
 class WelcomeView extends StatefulWidget {
-  const WelcomeView({super.key});
+  final User user; // Define user as a field in the WelcomeView class
+
+  const WelcomeView({Key? key, required this.user})
+      : super(key: key); // Add user as a required parameter in the constructor
 
   @override
   State<WelcomeView> createState() => _WelcomeViewState();
 }
 
 class _WelcomeViewState extends State<WelcomeView> {
+  final UserRepository userRepository =
+      UserRepository(); // Instantiate UserRepository
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -37,8 +45,11 @@ class _WelcomeViewState extends State<WelcomeView> {
                 height: media.width * 0.1,
               ),
               Text(
-                "Welcome, Stefani",
-                style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
+                "Welcome, ${widget.user.name}",
+                style: TextStyle(
+                    color: TColor.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700),
               ),
               Text(
                 "You are all set now, let’s reach your\ngoals together with us",
@@ -50,8 +61,13 @@ class _WelcomeViewState extends State<WelcomeView> {
                 padding: const EdgeInsets.all(12.0),
                 child: RoundButton(
                     title: "Go To Home",
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const MainTabView()));
+                    onPressed: () async {
+                      await userRepository
+                          .addUser(widget.user); // Add user to the database
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MainTabView()));
                     }),
               ),
             ],

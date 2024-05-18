@@ -30,6 +30,21 @@ class UserRepository {
     return null;
   }
 
+  // Get a user by email
+  Future<User?> getUserByEmail(String email) async {
+    try {
+      final QuerySnapshot<Map<String, dynamic>> result = await _usersCollection
+          .where('mail', isEqualTo: email)
+          .get() as QuerySnapshot<Map<String, dynamic>>;
+      if (result.docs.isNotEmpty) {
+        return User.fromMap(result.docs.first.data());
+      }
+    } catch (e) {
+      print("Error getting user: $e");
+    }
+    return null;
+  }
+
   // Update a user
   Future<void> updateUser(User user) async {
     try {

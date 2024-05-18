@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:fitness_ai_app/common/colo_extension.dart';
 import 'package:fitness_ai_app/common_widget/round_button.dart';
 import 'package:fitness_ai_app/common_widget/round_textfield.dart';
 import 'package:fitness_ai_app/view/login/complete_profile_view.dart';
-import 'package:flutter/material.dart';
+import 'package:fitness_ai_app/view/login/welcome_view.dart';
+import '../../data/repo/user_repository.dart';
+import '../../data/model/user.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -12,7 +15,12 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final UserRepository _userRepository = UserRepository();
+  bool obscureText = true;
   bool isCheck = false;
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -32,7 +40,10 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 Text(
                   "Welcome Back",
-                  style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
+                  style: TextStyle(
+                      color: TColor.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
                   height: media.width * 0.05,
@@ -40,7 +51,8 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(
                   height: media.width * 0.04,
                 ),
-                const RoundTextField(
+                RoundTextField(
+                  controller: _emailController,
                   hitText: "Email",
                   icon: "assets/img/email.png",
                   keyboardType: TextInputType.emailAddress,
@@ -49,43 +61,81 @@ class _LoginViewState extends State<LoginView> {
                   height: media.width * 0.04,
                 ),
                 RoundTextField(
+                  controller: _passwordController,
                   hitText: "Password",
                   icon: "assets/img/lock.png",
-                  obscureText: true,
+                  obscureText: obscureText, // Pass the obscureText state here
                   rigtIcon: TextButton(
-                      onPressed: () {},
-                      child: Container(
-                          alignment: Alignment.center,
-                          width: 20,
-                          height: 20,
-                          child: Image.asset(
-                            "assets/img/show_password.png",
-                            width: 20,
-                            height: 20,
-                            fit: BoxFit.contain,
-                            color: TColor.gray,
-                          ))),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText; // Toggle the value
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 20,
+                      height: 20,
+                      child: Image.asset(
+                        "assets/img/show_password.png",
+                        width: 20,
+                        height: 20,
+                        fit: BoxFit.contain,
+                        color: TColor.gray,
+                      ),
+                    ),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Forgot your password?",
-                      style: TextStyle(color: TColor.gray, fontSize: 10, decoration: TextDecoration.underline),
+                      style: TextStyle(
+                          color: TColor.gray,
+                          fontSize: 10,
+                          decoration: TextDecoration.underline),
                     ),
                   ],
                 ),
                 const Spacer(),
                 RoundButton(
                     title: "Login",
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CompleteProfileView()));
+                    onPressed: () async {
+                      String email = _emailController.text;
+                      String password = _passwordController.text;
+
+                      User? user = await _userRepository.getUserByEmail(email);
+
+                      if (user != null && user.password == password) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeView(user: user),
+                          ),
+                        );
+                      } else {
+                        // Show error message
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Login Failed'),
+                            content: Text('Invalid email or password.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                     }),
                 SizedBox(
                   height: media.width * 0.04,
                 ),
                 Row(
-                  // crossAxisAlignment: CrossAxisAlignment.,
                   children: [
                     Expanded(
                         child: Container(
@@ -175,7 +225,10 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       Text(
                         "Register",
-                        style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            color: TColor.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700),
                       )
                     ],
                   ),

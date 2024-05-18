@@ -41,7 +41,8 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   MyApp({required this.isFirstTime});
-  final bool isFirstTime;
+
+  final bool isFirstTime; // BU TEST İÇİN VAR KALDIRILACAK!!!!!!!!
 
   // This widget is the root of your application.
   @override

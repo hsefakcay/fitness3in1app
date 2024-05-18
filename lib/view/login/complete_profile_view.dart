@@ -1,12 +1,15 @@
-import 'package:fitness_ai_app/common/colo_extension.dart';
-import 'package:fitness_ai_app/view/login/what_your_goal_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../common/colo_extension.dart';
 import '../../common_widget/round_button.dart';
 import '../../common_widget/round_textfield.dart';
+import '../../data/model/user.dart';
+import '../login/what_your_goal_view.dart';
 
 class CompleteProfileView extends StatefulWidget {
-  const CompleteProfileView({super.key});
+  final User user;
+
+  const CompleteProfileView({Key? key, required this.user}) : super(key: key);
 
   @override
   State<CompleteProfileView> createState() => _CompleteProfileViewState();
@@ -19,6 +22,14 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
 
   String? selectedGender;
   DateTime? selectedDate;
+
+  User mergeUserData(User user) {
+    user.gender = selectedGender ?? user.gender;
+    user.age = selectedDate?.year ?? user.age;
+    user.height = double.tryParse(txtHeight.text) ?? user.height;
+    user.weight = double.tryParse(txtWeight.text) ?? user.weight;
+    return user;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +68,6 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Column(
                     children: [
-                      // Gender Selection Dropdown
                       Container(
                         decoration: BoxDecoration(
                           color: TColor.lightGray,
@@ -107,7 +117,6 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                           ],
                         ),
                       ),
-
                       SizedBox(height: media.width * 0.04),
                       GestureDetector(
                         onTap: () async {
@@ -170,7 +179,8 @@ class _CompleteProfileViewState extends State<CompleteProfileView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const WhatYourGoalView(),
+                              builder: (context) => WhatYourGoalView(
+                                  user: mergeUserData(widget.user)),
                             ),
                           );
                         },

@@ -1,14 +1,14 @@
 class User {
-  final String id;
-  final String name;
-  final String surname;
-  final String mail;
-  final String password;
-  final int age;
-  final String gender;
-  final double height;
-  final double weight;
-  final String programType;
+  String id;
+  String name;
+  String surname;
+  String mail;
+  String password;
+  int age;
+  String gender;
+  double height;
+  double weight;
+  String programType;
 
   User({
     required this.id,
