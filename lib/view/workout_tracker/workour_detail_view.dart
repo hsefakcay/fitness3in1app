@@ -17,16 +17,8 @@ class WorkoutDetailView extends StatefulWidget {
 
 class _WorkoutDetailViewState extends State<WorkoutDetailView> {
   List latestArr = [
-    {
-      "image": "assets/img/Workout1.png",
-      "title": "Fullbody Workout",
-      "time": "Today, 03:00pm"
-    },
-    {
-      "image": "assets/img/Workout2.png",
-      "title": "Upperbody Workout",
-      "time": "June 05, 02:00pm"
-    },
+    {"image": "assets/img/Workout1.png", "title": "Fullbody Workout", "time": "Today, 03:00pm"},
+    {"image": "assets/img/Workout2.png", "title": "Upperbody Workout", "time": "June 05, 02:00pm"},
   ];
 
   List youArr = [
@@ -40,46 +32,22 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
       "name": "Set 1",
       "set": [
         {"image": "assets/img/img_1.png", "title": "Warm Up", "value": "05:00"},
-        {
-          "image": "assets/img/img_2.png",
-          "title": "Jumping Jack",
-          "value": "12x"
-        },
+        {"image": "assets/img/img_2.png", "title": "Jumping Jack", "value": "12x"},
         {"image": "assets/img/img_1.png", "title": "Skipping", "value": "15x"},
         {"image": "assets/img/img_2.png", "title": "Squats", "value": "20x"},
-        {
-          "image": "assets/img/img_1.png",
-          "title": "Arm Raises",
-          "value": "00:53"
-        },
-        {
-          "image": "assets/img/img_2.png",
-          "title": "Rest and Drink",
-          "value": "02:00"
-        },
+        {"image": "assets/img/img_1.png", "title": "Arm Raises", "value": "00:53"},
+        {"image": "assets/img/img_2.png", "title": "Rest and Drink", "value": "02:00"},
       ],
     },
     {
       "name": "Set 2",
       "set": [
         {"image": "assets/img/img_1.png", "title": "Warm Up", "value": "05:00"},
-        {
-          "image": "assets/img/img_2.png",
-          "title": "Jumping Jack",
-          "value": "12x"
-        },
+        {"image": "assets/img/img_2.png", "title": "Jumping Jack", "value": "12x"},
         {"image": "assets/img/img_1.png", "title": "Skipping", "value": "15x"},
         {"image": "assets/img/img_2.png", "title": "Squats", "value": "20x"},
-        {
-          "image": "assets/img/img_1.png",
-          "title": "Arm Raises",
-          "value": "00:53"
-        },
-        {
-          "image": "assets/img/img_2.png",
-          "title": "Rest and Drink",
-          "value": "02:00"
-        },
+        {"image": "assets/img/img_1.png", "title": "Arm Raises", "value": "00:53"},
+        {"image": "assets/img/img_2.png", "title": "Rest and Drink", "value": "02:00"},
       ],
     }
   ];
@@ -88,8 +56,7 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Container(
-      decoration:
-          BoxDecoration(gradient: LinearGradient(colors: TColor.primaryG)),
+      decoration: BoxDecoration(gradient: LinearGradient(colors: TColor.primaryG)),
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
@@ -106,9 +73,7 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                   height: 40,
                   width: 40,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: TColor.lightGray,
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: TColor.lightGray, borderRadius: BorderRadius.circular(10)),
                   child: Image.asset(
                     "assets/img/black_btn.png",
                     width: 15,
@@ -125,9 +90,7 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                     height: 40,
                     width: 40,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: TColor.lightGray,
-                        borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(color: TColor.lightGray, borderRadius: BorderRadius.circular(10)),
                     child: Image.asset(
                       "assets/img/more_btn.png",
                       width: 15,
@@ -161,8 +124,7 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           decoration: BoxDecoration(
               color: TColor.white,
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(25), topRight: Radius.circular(25))),
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25))),
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Stack(
@@ -176,9 +138,8 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                       Container(
                         width: 50,
                         height: 4,
-                        decoration: BoxDecoration(
-                            color: TColor.gray.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(3)),
+                        decoration:
+                            BoxDecoration(color: TColor.gray.withOpacity(0.3), borderRadius: BorderRadius.circular(3)),
                       ),
                       SizedBox(
                         height: media.width * 0.05,
@@ -192,15 +153,11 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                               children: [
                                 Text(
                                   widget.dObj["title"].toString(),
-                                  style: TextStyle(
-                                      color: TColor.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
+                                  style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                                 ),
                                 Text(
                                   "${widget.dObj["exercises"].toString()} | ${widget.dObj["time"].toString()} | 320 Calories Burn",
-                                  style: TextStyle(
-                                      color: TColor.gray, fontSize: 12),
+                                  style: TextStyle(color: TColor.gray, fontSize: 12),
                                 ),
                               ],
                             ),
@@ -225,8 +182,8 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                           time: "5/27, 09:00 AM",
                           color: TColor.primaryColor2.withOpacity(0.3),
                           onPressed: () {
-
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const WorkoutScheduleView() )  );
+                            Navigator.push(
+                                context, MaterialPageRoute(builder: (context) => const WorkoutScheduleView()));
                           }),
                       SizedBox(
                         height: media.width * 0.02,
@@ -245,17 +202,13 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                         children: [
                           Text(
                             "You'll Need",
-                            style: TextStyle(
-                                color: TColor.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
+                            style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                           ),
                           TextButton(
                             onPressed: () {},
                             child: Text(
                               "${youArr.length} Items",
-                              style:
-                                  TextStyle(color: TColor.gray, fontSize: 12),
+                              style: TextStyle(color: TColor.gray, fontSize: 12),
                             ),
                           )
                         ],
@@ -272,16 +225,13 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                               return Container(
                                   margin: const EdgeInsets.all(8),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         height: media.width * 0.35,
                                         width: media.width * 0.35,
                                         decoration: BoxDecoration(
-                                            color: TColor.lightGray,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
+                                            color: TColor.lightGray, borderRadius: BorderRadius.circular(15)),
                                         alignment: Alignment.center,
                                         child: Image.asset(
                                           yObj["image"].toString(),
@@ -294,9 +244,7 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Text(
                                           yObj["title"].toString(),
-                                          style: TextStyle(
-                                              color: TColor.black,
-                                              fontSize: 12),
+                                          style: TextStyle(color: TColor.black, fontSize: 12),
                                         ),
                                       )
                                     ],
@@ -311,17 +259,13 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                         children: [
                           Text(
                             "Exercises",
-                            style: TextStyle(
-                                color: TColor.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700),
+                            style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                           ),
                           TextButton(
                             onPressed: () {},
                             child: Text(
                               "${youArr.length} Sets",
-                              style:
-                                  TextStyle(color: TColor.gray, fontSize: 12),
+                              style: TextStyle(color: TColor.gray, fontSize: 12),
                             ),
                           )
                         ],
@@ -348,20 +292,11 @@ class _WorkoutDetailViewState extends State<WorkoutDetailView> {
                             );
                           }),
                       SizedBox(
-                        height: media.width * 0.1,
+                        height: media.width * 0.2,
                       ),
                     ],
                   ),
                 ),
-                SafeArea(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      RoundButton(title: "Start Workout", onPressed: () {})
-                    ],
-                  ),
-                )
               ],
             ),
           ),
