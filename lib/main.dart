@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_ai_app/common/colo_extension.dart';
 import 'package:fitness_ai_app/firebase_options.dart';
+import 'package:fitness_ai_app/view/login/login_view.dart';
 import 'package:fitness_ai_app/view/main_tab/main_tab_view.dart';
 import 'package:fitness_ai_app/view/on_boarding/started_view.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ Future<void> main() async {
 
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool isFirstTime = prefs.getBool('isFirstTime') ?? true;
-  isFirstTime = true; // BU TEST İÇİN VAR KALDIRILACAK!!!!!!!!
+  //isFirstTime = true; // BU TEST İÇİN VAR KALDIRILACAK!!!!!!!!
   runApp(MyApp(isFirstTime: isFirstTime));
 }
 
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
             // is not restarted.
             primaryColor: TColor.primaryColor1,
             fontFamily: "Poppins"),
-        home: isFirstTime ? StartedView() : MainTabView(),
+        home: isFirstTime ? StartedView() : LoginView(),
       ),
     );
   }
