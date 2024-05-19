@@ -16,8 +16,16 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
   int touchedIndex = -1;
 
   List latestArr = [
-    {"image": "assets/img/pic_4.png", "title": "Drinking 300ml Water", "time": "About 1 minutes ago"},
-    {"image": "assets/img/pic_5.png", "title": "Eat Snack (Fitbar)", "time": "About 3 hours ago"},
+    {
+      "image": "assets/img/pic_4.png",
+      "title": "Drinking 300ml Water",
+      "time": "About 1 minutes ago"
+    },
+    {
+      "image": "assets/img/pic_5.png",
+      "title": "Eat Snack (Fitbar)",
+      "time": "About 3 hours ago"
+    },
   ];
 
   @override
@@ -37,7 +45,9 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
             height: 40,
             width: 40,
             alignment: Alignment.center,
-            decoration: BoxDecoration(color: TColor.lightGray, borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(
+                color: TColor.lightGray,
+                borderRadius: BorderRadius.circular(10)),
             child: Image.asset(
               "assets/img/black_btn.png",
               width: 15,
@@ -48,7 +58,8 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
         ),
         title: Text(
           "Activity Tracker",
-          style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
+          style: TextStyle(
+              color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
         ),
         actions: [
           InkWell(
@@ -58,7 +69,9 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
               height: 40,
               width: 40,
               alignment: Alignment.center,
-              decoration: BoxDecoration(color: TColor.lightGray, borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(
+                  color: TColor.lightGray,
+                  borderRadius: BorderRadius.circular(10)),
               child: Image.asset(
                 "assets/img/more_btn.png",
                 width: 15,
@@ -76,10 +89,13 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [TColor.primaryColor2.withOpacity(0.3), TColor.primaryColor1.withOpacity(0.3)]),
+                  gradient: LinearGradient(colors: [
+                    TColor.primaryColor2.withOpacity(0.3),
+                    TColor.primaryColor1.withOpacity(0.3)
+                  ]),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
@@ -89,7 +105,10 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                       children: [
                         Text(
                           "Today Target",
-                          style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w700),
+                          style: TextStyle(
+                              color: TColor.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700),
                         ),
                         SizedBox(
                           width: 30,
@@ -105,7 +124,8 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                                 onPressed: () {},
                                 padding: EdgeInsets.zero,
                                 height: 30,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(25)),
                                 textColor: TColor.primaryColor1,
                                 minWidth: double.maxFinite,
                                 elevation: 0,
@@ -154,35 +174,11 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                 children: [
                   Text(
                     "Activity  Progress",
-                    style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
                   ),
-                  Container(
-                      height: 30,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: TColor.primaryG),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                          items: ["Weekly", "Monthly"]
-                              .map((name) => DropdownMenuItem(
-                                    value: name,
-                                    child: Text(
-                                      name,
-                                      style: TextStyle(color: TColor.gray, fontSize: 14),
-                                    ),
-                                  ))
-                              .toList(),
-                          onChanged: (value) {},
-                          icon: Icon(Icons.expand_more, color: TColor.white),
-                          hint: Text(
-                            "Weekly",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: TColor.white, fontSize: 12),
-                          ),
-                        ),
-                      )),
                 ],
               ),
               SizedBox(
@@ -190,11 +186,14 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
               ),
               Container(
                 height: media.width * 0.5,
-                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
                 decoration: BoxDecoration(
                     color: TColor.white,
                     borderRadius: BorderRadius.circular(15),
-                    boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 3)]),
+                    boxShadow: const [
+                      BoxShadow(color: Colors.black12, blurRadius: 3)
+                    ]),
                 child: BarChart(BarChartData(
                   barTouchData: BarTouchData(
                     touchTooltipData: BarTouchTooltipData(
@@ -255,7 +254,8 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                           touchedIndex = -1;
                           return;
                         }
-                        touchedIndex = barTouchResponse.spot!.touchedBarGroupIndex;
+                        touchedIndex =
+                            barTouchResponse.spot!.touchedBarGroupIndex;
                       });
                     },
                   ),
@@ -295,13 +295,19 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                 children: [
                   Text(
                     "Latest Workout",
-                    style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
                   ),
                   TextButton(
                     onPressed: () {},
                     child: Text(
                       "See More",
-                      style: TextStyle(color: TColor.gray, fontSize: 14, fontWeight: FontWeight.w700),
+                      style: TextStyle(
+                          color: TColor.gray,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700),
                     ),
                   )
                 ],
@@ -368,19 +374,26 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
   List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
         switch (i) {
           case 0:
-            return makeGroupData(0, 5, TColor.primaryG, isTouched: i == touchedIndex);
+            return makeGroupData(0, 5, TColor.primaryG,
+                isTouched: i == touchedIndex);
           case 1:
-            return makeGroupData(1, 10.5, TColor.secondaryG, isTouched: i == touchedIndex);
+            return makeGroupData(1, 10.5, TColor.secondaryG,
+                isTouched: i == touchedIndex);
           case 2:
-            return makeGroupData(2, 5, TColor.primaryG, isTouched: i == touchedIndex);
+            return makeGroupData(2, 5, TColor.primaryG,
+                isTouched: i == touchedIndex);
           case 3:
-            return makeGroupData(3, 7.5, TColor.secondaryG, isTouched: i == touchedIndex);
+            return makeGroupData(3, 7.5, TColor.secondaryG,
+                isTouched: i == touchedIndex);
           case 4:
-            return makeGroupData(4, 15, TColor.primaryG, isTouched: i == touchedIndex);
+            return makeGroupData(4, 15, TColor.primaryG,
+                isTouched: i == touchedIndex);
           case 5:
-            return makeGroupData(5, 5.5, TColor.secondaryG, isTouched: i == touchedIndex);
+            return makeGroupData(5, 5.5, TColor.secondaryG,
+                isTouched: i == touchedIndex);
           case 6:
-            return makeGroupData(6, 8.5, TColor.primaryG, isTouched: i == touchedIndex);
+            return makeGroupData(6, 8.5, TColor.primaryG,
+                isTouched: i == touchedIndex);
           default:
             return throw Error();
         }
@@ -399,10 +412,14 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
       barRods: [
         BarChartRodData(
           toY: isTouched ? y + 1 : y,
-          gradient: LinearGradient(colors: barColor, begin: Alignment.topCenter, end: Alignment.bottomCenter),
+          gradient: LinearGradient(
+              colors: barColor,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter),
           width: width,
-          borderSide:
-              isTouched ? const BorderSide(color: Colors.green) : const BorderSide(color: Colors.white, width: 0),
+          borderSide: isTouched
+              ? const BorderSide(color: Colors.green)
+              : const BorderSide(color: Colors.white, width: 0),
           backDrawRodData: BackgroundBarChartRodData(
             show: true,
             toY: 20,
