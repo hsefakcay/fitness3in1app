@@ -11,16 +11,20 @@ import '../../data/UserProvider.dart';
 class WelcomeView extends StatefulWidget {
   final User user; // Define user as a field in the WelcomeView class
 
-  final bool fromWelcomeView; // Flag to indicate if coming from complete profile screen
+  final bool
+      fromWelcomeView; // Flag to indicate if coming from complete profile screen
 
-  const WelcomeView({Key? key, required this.user, required this.fromWelcomeView}) : super(key: key);
+  const WelcomeView(
+      {Key? key, required this.user, required this.fromWelcomeView})
+      : super(key: key);
 
   @override
   State<WelcomeView> createState() => _WelcomeViewState();
 }
 
 class _WelcomeViewState extends State<WelcomeView> {
-  final UserRepository userRepository = UserRepository(); // Instantiate UserRepository
+  final UserRepository userRepository =
+      UserRepository(); // Instantiate UserRepository
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,10 @@ class _WelcomeViewState extends State<WelcomeView> {
               ),
               Text(
                 "Welcome, ${widget.user.name.toUpperCase()}",
-                style: TextStyle(color: TColor.black, fontSize: 20, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    color: TColor.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700),
               ),
               Text(
                 "You are all set now, let’s reach your\ngoals together with us",
@@ -63,8 +70,9 @@ class _WelcomeViewState extends State<WelcomeView> {
                   onPressed: () async {
                     if (widget.fromWelcomeView) {
                       await userRepository.addUser(widget.user);
-                      Provider.of<UserProvider>(context, listen: false).setUserId(widget.user.id); // Set the user ID
                     }
+                    Provider.of<UserProvider>(context, listen: false)
+                        .setUserId(widget.user.id); // Set the user ID
                     Navigator.push(
                       context,
                       MaterialPageRoute(
