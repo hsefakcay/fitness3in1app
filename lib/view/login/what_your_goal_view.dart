@@ -19,9 +19,10 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
   CarouselController buttonCarouselController = CarouselController();
   int selectedIndex = 0; // Track the selected index
 
-  void updateProgramType(String programType) {
+  void updateProgramType(int index, CarouselPageChangedReason reason) {
     setState(() {
-      widget.user.programType = programType;
+      selectedIndex = index;
+      widget.user.programType = goalArr[index]["title"].toString();
     });
   }
 
@@ -114,6 +115,7 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                 viewportFraction: 0.7,
                 aspectRatio: 0.74,
                 initialPage: 0,
+                onPageChanged: updateProgramType,
               ),
             ),
           ),
@@ -144,19 +146,21 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: RoundButton(
-                      title: "Confirm",
-                      onPressed: () {
-                        String selectedProgramType =
-                            goalArr[selectedIndex]["title"].toString();
-                        updateProgramType(selectedProgramType);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeView(
-                                user: widget.user, fromWelcomeView: true),
+                    title: "Confirm",
+                    onPressed: () {
+                      updateProgramType(
+                          selectedIndex, CarouselPageChangedReason.manual);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WelcomeView(
+                            user: widget.user,
+                            fromWelcomeView: true,
                           ),
-                        );
-                      }),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),

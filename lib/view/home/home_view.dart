@@ -44,6 +44,8 @@ class _HomeViewState extends State<HomeView> {
     return _userProvider.user;
   }
 
+  //bekleme eklenebilir buraya
+  //null hatası burada veriliyor
   double calculateBMI() {
     return _userProvider.user!.weight /
         ((_userProvider.user?.height)! /

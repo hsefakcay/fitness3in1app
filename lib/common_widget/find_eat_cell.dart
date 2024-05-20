@@ -1,4 +1,5 @@
 import 'package:fitness_ai_app/common_widget/round_button.dart';
+import 'package:fitness_ai_app/view/meal_planner/meal_food_details_view.dart';
 import 'package:flutter/material.dart';
 
 import '../common/colo_extension.dart';
@@ -14,7 +15,7 @@ class FindEatCell extends StatelessWidget {
     bool isEvent = index % 2 == 0;
     return Container(
       margin: const EdgeInsets.all(8),
-      width: media.width * 0.5,
+      width: media.width * 0.4,
       decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isEvent
@@ -77,7 +78,13 @@ class FindEatCell extends StatelessWidget {
                       ? RoundButtonType.bgGradient
                       : RoundButtonType.bgSGradient,
                   title: "Select",
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                MealFoodDetailsView(eObj: fObj)));
+                  }),
             ),
           ),
         ],

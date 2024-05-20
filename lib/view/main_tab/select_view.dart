@@ -29,10 +29,10 @@ class SelectView extends StatelessWidget {
                     ),
                   );
                 }),
-
-                const SizedBox(height: 15,),
-
-                  RoundButton(
+            const SizedBox(
+              height: 15,
+            ),
+            RoundButton(
                 title: "Meal Planner",
                 onPressed: () {
                   Navigator.push(
@@ -42,10 +42,10 @@ class SelectView extends StatelessWidget {
                     ),
                   );
                 }),
-
-                const SizedBox(height: 15,),
-
-                  RoundButton(
+            const SizedBox(
+              height: 15,
+            ),
+            RoundButton(
                 title: "Sleep Tracker",
                 onPressed: () {
                   Navigator.push(
