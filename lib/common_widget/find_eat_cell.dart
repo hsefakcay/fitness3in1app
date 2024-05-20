@@ -19,14 +19,8 @@ class FindEatCell extends StatelessWidget {
       decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isEvent
-                ? [
-                    TColor.primaryColor2.withOpacity(0.5),
-                    TColor.primaryColor1.withOpacity(0.5)
-                  ]
-                : [
-                    TColor.secondaryColor2.withOpacity(0.5),
-                    TColor.secondaryColor1.withOpacity(0.5)
-                  ],
+                ? [TColor.primaryColor2.withOpacity(0.5), TColor.primaryColor1.withOpacity(0.5)]
+                : [TColor.secondaryColor2.withOpacity(0.5), TColor.secondaryColor1.withOpacity(0.5)],
           ),
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(25),
@@ -51,10 +45,7 @@ class FindEatCell extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Text(
               fObj["name"],
-              style: TextStyle(
-                  color: TColor.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w500),
             ),
           ),
           Padding(
@@ -74,16 +65,10 @@ class FindEatCell extends StatelessWidget {
               height: 25,
               child: RoundButton(
                   fontSize: 12,
-                  type: isEvent
-                      ? RoundButtonType.bgGradient
-                      : RoundButtonType.bgSGradient,
+                  type: isEvent ? RoundButtonType.bgGradient : RoundButtonType.bgSGradient,
                   title: "Select",
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MealFoodDetailsView(eObj: fObj)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MealFoodDetailsView(eObj: fObj)));
                   }),
             ),
           ),

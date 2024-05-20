@@ -1,4 +1,3 @@
-import 'package:fitness_ai_app/common_widget/food_category_widget.dart';
 import 'package:fitness_ai_app/view/meal_planner/meal_planner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_ai_app/util/api_helper.dart';
