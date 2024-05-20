@@ -168,10 +168,18 @@ class _ApiTestWidgetState extends State<ApiTestWidget> {
                       physics: NeverScrollableScrollPhysics(),
                       itemCount: _suggestedMeals.length,
                       itemBuilder: (context, index) {
-                        return Text(
-                          _suggestedMeals[index],
-                          style: TextStyle(
-                            fontSize: 16.0,
+                        return Card(
+                          elevation: 5,
+                          margin: EdgeInsets.symmetric(vertical: 8.0),
+                          child: ListTile(
+                            leading: Icon(Icons.fastfood),
+                            title: Text(
+                              _suggestedMeals[index],
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -191,6 +199,7 @@ class _ApiTestWidgetState extends State<ApiTestWidget> {
                     if (imageUrl != null) {
                       return Card(
                         elevation: 5,
+                        margin: EdgeInsets.symmetric(vertical: 8.0),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
