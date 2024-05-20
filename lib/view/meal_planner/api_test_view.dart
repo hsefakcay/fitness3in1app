@@ -1,3 +1,4 @@
+import 'package:fitness_ai_app/common_widget/food_category_widget.dart';
 import 'package:fitness_ai_app/view/meal_planner/meal_planner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_ai_app/util/api_helper.dart';
@@ -45,8 +46,7 @@ class _ApiTestWidgetState extends State<ApiTestWidget> {
     return _userProvider.user;
   }
 
-  List<String> suggestMeals(
-      String? goalType, int calorieGoal, List<Map<String, dynamic>> foods) {
+  List<String> suggestMeals(String? goalType, int calorieGoal, List<Map<String, dynamic>> foods) {
     List<String> suggestedMeals = [];
     int proteinMin = 0;
     int fatMax = 0;
@@ -101,15 +101,12 @@ class _ApiTestWidgetState extends State<ApiTestWidget> {
           _foodData = result;
 
           // Assuming _foodData['hints'] contains the list of foods with their nutritional information
-          List<Map<String, dynamic>> foods = _foodData!['hints']
-              .map<Map<String, dynamic>>(
-                  (hint) => hint['food'] as Map<String, dynamic>)
-              .toList();
+          List<Map<String, dynamic>> foods =
+              _foodData!['hints'].map<Map<String, dynamic>>((hint) => hint['food'] as Map<String, dynamic>).toList();
 
           int calorieGoal = _calorieGoals[_userProvider.user?.programType]!;
           // Call suggestMeals with the desired calorie goal and list of foods
-          _suggestedMeals =
-              suggestMeals(_userProvider.user?.programType, calorieGoal, foods);
+          _suggestedMeals = suggestMeals(_userProvider.user?.programType, calorieGoal, foods);
         });
       } catch (e) {
         print('Error: $e');
@@ -118,11 +115,7 @@ class _ApiTestWidgetState extends State<ApiTestWidget> {
   }
 
   List findEatArr = [
-    {
-      "name": "Breakfast",
-      "image": "assets/img/m_3.png",
-      "number": "120+ Foods"
-    },
+    {"name": "Breakfast", "image": "assets/img/m_3.png", "number": "120+ Foods"},
     {"name": "Lunch", "image": "assets/img/m_4.png", "number": "130+ Foods"},
   ];
 

@@ -1,3 +1,4 @@
+import 'package:fitness_ai_app/common_widget/food_category_widget.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -17,24 +18,12 @@ class MealPlannerView extends StatefulWidget {
 
 class _MealPlannerViewState extends State<MealPlannerView> {
   List todayMealArr = [
-    {
-      "name": "Salmon Nigiri",
-      "image": "assets/img/m_1.png",
-      "time": "28/05/2023 07:00 AM"
-    },
-    {
-      "name": "Lowfat Milk",
-      "image": "assets/img/m_2.png",
-      "time": "28/05/2023 08:00 AM"
-    },
+    {"name": "Salmon Nigiri", "image": "assets/img/m_1.png", "time": "28/05/2023 07:00 AM"},
+    {"name": "Lowfat Milk", "image": "assets/img/m_2.png", "time": "28/05/2023 08:00 AM"},
   ];
 
   List findEatArr = [
-    {
-      "name": "Breakfast",
-      "image": "assets/img/m_3.png",
-      "number": "120+ Foods"
-    },
+    {"name": "Breakfast", "image": "assets/img/m_3.png", "number": "120+ Foods"},
     {"name": "Lunch", "image": "assets/img/m_4.png", "number": "130+ Foods"},
   ];
 
@@ -56,9 +45,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
             height: 40,
             width: 40,
             alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: TColor.lightGray,
-                borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(color: TColor.lightGray, borderRadius: BorderRadius.circular(10)),
             child: Image.asset(
               "assets/img/black_btn.png",
               width: 15,
@@ -69,8 +56,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
         ),
         title: Text(
           "Meal Planner",
-          style: TextStyle(
-              color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
+          style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
         ),
         actions: [
           InkWell(
@@ -80,9 +66,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
               height: 40,
               width: 40,
               alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: TColor.lightGray,
-                  borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(color: TColor.lightGray, borderRadius: BorderRadius.circular(10)),
               child: Image.asset(
                 "assets/img/more_btn.png",
                 width: 15,
@@ -108,10 +92,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                     children: [
                       Text(
                         "Meal Nutritions",
-                        style: TextStyle(
-                            color: TColor.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
+                        style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                       ),
                       Container(
                           height: 30,
@@ -127,19 +108,16 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                                         value: name,
                                         child: Text(
                                           name,
-                                          style: TextStyle(
-                                              color: TColor.gray, fontSize: 14),
+                                          style: TextStyle(color: TColor.gray, fontSize: 14),
                                         ),
                                       ))
                                   .toList(),
                               onChanged: (value) {},
-                              icon:
-                                  Icon(Icons.expand_more, color: TColor.white),
+                              icon: Icon(Icons.expand_more, color: TColor.white),
                               hint: Text(
                                 "Weekly",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: TColor.white, fontSize: 12),
+                                style: TextStyle(color: TColor.white, fontSize: 12),
                               ),
                             ),
                           )),
@@ -167,8 +145,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                           lineTouchData: LineTouchData(
                             enabled: true,
                             handleBuiltInTouches: false,
-                            touchCallback: (FlTouchEvent event,
-                                LineTouchResponse? response) {
+                            touchCallback: (FlTouchEvent event, LineTouchResponse? response) {
                               // if (response == null || response.lineBarSpots == null) {
                               //   return;
                               // }
@@ -181,16 +158,13 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                               //   });
                               // }
                             },
-                            mouseCursorResolver: (FlTouchEvent event,
-                                LineTouchResponse? response) {
-                              if (response == null ||
-                                  response.lineBarSpots == null) {
+                            mouseCursorResolver: (FlTouchEvent event, LineTouchResponse? response) {
+                              if (response == null || response.lineBarSpots == null) {
                                 return SystemMouseCursors.basic;
                               }
                               return SystemMouseCursors.click;
                             },
-                            getTouchedSpotIndicator: (LineChartBarData barData,
-                                List<int> spotIndexes) {
+                            getTouchedSpotIndicator: (LineChartBarData barData, List<int> spotIndexes) {
                               return spotIndexes.map((index) {
                                 return TouchedSpotIndicatorData(
                                   FlLine(
@@ -198,9 +172,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                                   ),
                                   FlDotData(
                                     show: true,
-                                    getDotPainter:
-                                        (spot, percent, barData, index) =>
-                                            FlDotCirclePainter(
+                                    getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
                                       radius: 3,
                                       color: Colors.white,
                                       strokeWidth: 3,
@@ -212,8 +184,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                             },
                             touchTooltipData: LineTouchTooltipData(
                               tooltipRoundedRadius: 20,
-                              getTooltipItems:
-                                  (List<LineBarSpot> lineBarsSpot) {
+                              getTooltipItems: (List<LineBarSpot> lineBarsSpot) {
                                 return lineBarsSpot.map((lineBarSpot) {
                                   return LineTooltipItem(
                                     "${lineBarSpot.x.toInt()} mins ago",
@@ -264,8 +235,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                     height: media.width * 0.05,
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                     decoration: BoxDecoration(
                       color: TColor.primaryColor2.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(15),
@@ -275,10 +245,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                       children: [
                         Text(
                           "Daily Meal Schedule",
-                          style: TextStyle(
-                              color: TColor.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700),
+                          style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w700),
                         ),
                         SizedBox(
                           width: 70,
@@ -292,8 +259,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const MealScheduleView(),
+                                  builder: (context) => const MealScheduleView(),
                                 ),
                               );
                             },
@@ -310,10 +276,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                     children: [
                       Text(
                         "Today Meals",
-                        style: TextStyle(
-                            color: TColor.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700),
+                        style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
                       ),
                       Container(
                           height: 30,
@@ -324,30 +287,21 @@ class _MealPlannerViewState extends State<MealPlannerView> {
                           ),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton(
-                              items: [
-                                "Breakfast",
-                                "Lunch",
-                                "Dinner",
-                                "Snack",
-                                "Dessert"
-                              ]
+                              items: ["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]
                                   .map((name) => DropdownMenuItem(
                                         value: name,
                                         child: Text(
                                           name,
-                                          style: TextStyle(
-                                              color: TColor.gray, fontSize: 14),
+                                          style: TextStyle(color: TColor.gray, fontSize: 14),
                                         ),
                                       ))
                                   .toList(),
                               onChanged: (value) {},
-                              icon:
-                                  Icon(Icons.expand_more, color: TColor.white),
+                              icon: Icon(Icons.expand_more, color: TColor.white),
                               hint: Text(
                                 "Breakfast",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: TColor.white, fontSize: 12),
+                                style: TextStyle(color: TColor.white, fontSize: 12),
                               ),
                             ),
                           )),
@@ -374,10 +328,7 @@ class _MealPlannerViewState extends State<MealPlannerView> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 "Find Something to Eat",
-                style: TextStyle(
-                    color: TColor.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700),
+                style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
               ),
             ),
             food_category_widget(media: media, findEatArr: findEatArr),
@@ -507,43 +458,6 @@ class _MealPlannerViewState extends State<MealPlannerView> {
       axisSide: meta.axisSide,
       space: 10,
       child: text,
-    );
-  }
-}
-
-class food_category_widget extends StatelessWidget {
-  const food_category_widget({
-    super.key,
-    required this.media,
-    required this.findEatArr,
-  });
-
-  final Size media;
-  final List findEatArr;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: media.width * 0.55,
-      child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          scrollDirection: Axis.horizontal,
-          itemCount: findEatArr.length,
-          itemBuilder: (context, index) {
-            var fObj = findEatArr[index] as Map? ?? {};
-            return InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MealFoodDetailsView(eObj: fObj)));
-              },
-              child: FindEatCell(
-                fObj: fObj,
-                index: index,
-              ),
-            );
-          }),
     );
   }
 }
