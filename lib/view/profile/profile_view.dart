@@ -96,7 +96,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.asset(
-                      "assets/img/u2.png",
+                      _userProvider.user!.gender == "Famale" ? "assets/img/u2.png" : "assets/img/u1.png",
                       width: 50,
                       height: 50,
                       fit: BoxFit.cover,
@@ -118,7 +118,7 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                         ),
                         Text(
-                          "${_userProvider.user?.programType} program",
+                          "${_userProvider.user?.programType} Program",
                           style: TextStyle(
                             color: TColor.gray,
                             fontSize: 12,
