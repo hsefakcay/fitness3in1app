@@ -125,6 +125,7 @@ class _ApiTestWidgetState extends State<ApiTestWidget> {
     },
     {"name": "Lunch", "image": "assets/img/m_4.png", "number": "130+ Foods"},
   ];
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -133,24 +134,55 @@ class _ApiTestWidgetState extends State<ApiTestWidget> {
       appBar: AppBar(
         title: Text('Food Searcher'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            food_category_widget(media: media, findEatArr: findEatArr),
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(labelText: 'Search Food'),
-            ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: _searchFood,
-              child: Text('Search'),
-            ),
-            SizedBox(height: 20.0),
-            if (_foodData != null)
-              Expanded(
-                child: ListView.builder(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              food_category_widget(media: media, findEatArr: findEatArr),
+              TextField(
+                controller: _controller,
+                decoration: InputDecoration(labelText: 'Search Food'),
+              ),
+              SizedBox(height: 20.0),
+              ElevatedButton(
+                onPressed: _searchFood,
+                child: Text('Search'),
+              ),
+              SizedBox(height: 20.0),
+              if (_suggestedMeals.isNotEmpty)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Suggested Meals:',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8.0),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: _suggestedMeals.length,
+                      itemBuilder: (context, index) {
+                        return Text(
+                          _suggestedMeals[index],
+                          style: TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              SizedBox(height: 20.0),
+              if (_foodData != null)
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: _foodData!['hints'].length,
                   itemBuilder: (context, index) {
                     final food = _foodData!['hints'][index]['food'];
@@ -228,34 +260,8 @@ class _ApiTestWidgetState extends State<ApiTestWidget> {
                     }
                   },
                 ),
-              ),
-            if (_suggestedMeals.isNotEmpty)
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Suggested Meals:',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: _suggestedMeals.length,
-                    itemBuilder: (context, index) {
-                      return Text(
-                        _suggestedMeals[index],
-                        style: TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
