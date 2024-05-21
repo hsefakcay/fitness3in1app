@@ -1,3 +1,4 @@
+import 'package:fitness_ai_app/view/login/signup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_ai_app/common/colo_extension.dart';
 import 'package:fitness_ai_app/common_widget/round_button.dart';
@@ -212,7 +213,12 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignUpView(),
+                      ),
+                    );
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

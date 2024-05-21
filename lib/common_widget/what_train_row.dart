@@ -18,10 +18,8 @@ class WhatTrainRow extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              TColor.primaryColor2.withOpacity(0.3),
-              TColor.primaryColor1.withOpacity(0.3)
-            ]),
+            gradient:
+                LinearGradient(colors: [TColor.primaryColor2.withOpacity(0.3), TColor.primaryColor1.withOpacity(0.3)]),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Row(
@@ -32,16 +30,13 @@ class WhatTrainRow extends StatelessWidget {
                   children: [
                     Text(
                       wObj["title"].toString(),
-                      style: TextStyle(
-                          color: TColor.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(
                       height: 4,
                     ),
                     Text(
-                      "${wObj["exercises"].toString()} | ${ wObj["time"].toString() }" ,
+                      "${wObj["exercises"].toString()} | ${wObj["time"].toString()}",
                       style: TextStyle(
                         color: TColor.gray,
                         fontSize: 12,
@@ -50,17 +45,6 @@ class WhatTrainRow extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    SizedBox(
-                      width: 100,
-                      height: 30,
-                      child: RoundButton(
-                          title: "View More",
-                          fontSize: 10,
-                          type: RoundButtonType.textGradient,
-                          elevation:0.05,
-                          fontWeight: FontWeight.w400,
-                          onPressed: () {}),
-                    )
                   ],
                 ),
               ),

@@ -18,10 +18,10 @@ class ExercisesSetSection extends StatelessWidget {
       children: [
         Text(
           sObj["name"].toString(),
-          style: TextStyle(color: TColor.black, fontSize: 12, fontWeight: FontWeight.w500),
+          style: TextStyle(color: TColor.black, fontSize: 18, fontWeight: FontWeight.w500),
         ),
         const SizedBox(
-          height: 8,
+          height: 10,
         ),
         ListView.builder(
             padding: EdgeInsets.zero,
@@ -37,6 +37,9 @@ class ExercisesSetSection extends StatelessWidget {
                 },
               );
             }),
+        const SizedBox(
+          height: 20,
+        ),
       ],
     );
   }

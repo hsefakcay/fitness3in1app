@@ -221,25 +221,6 @@ class _WorkoutTrackerViewState extends State<WorkoutTrackerView> {
                           "Daily Workout Schedule",
                           style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w700),
                         ),
-                        SizedBox(
-                          width: 70,
-                          height: 25,
-                          child: RoundButton(
-                            title: "Check",
-                            type: RoundButtonType.bgGradient,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         const ActivityTrackerView(),
-                              //   ),
-                              // );
-                            },
-                          ),
-                        )
                       ],
                     ),
                   ),

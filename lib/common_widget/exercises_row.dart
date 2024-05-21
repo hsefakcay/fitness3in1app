@@ -16,13 +16,13 @@ class ExercisesRow extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             child: Image.asset(
               eObj["image"].toString(),
-              width: 60,
-              height: 60,
+              width: 75,
+              height: 75,
               fit: BoxFit.cover,
             ),
           ),
           const SizedBox(
-            width: 15,
+            width: 25,
           ),
           Expanded(
               child: Column(
@@ -30,7 +30,7 @@ class ExercisesRow extends StatelessWidget {
             children: [
               Text(
                 eObj["title"].toString(),
-                style: TextStyle(color: TColor.black, fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(color: TColor.black, fontSize: 16, fontWeight: FontWeight.w500),
               ),
               Text(
                 eObj["value"].toString(),
@@ -45,8 +45,8 @@ class ExercisesRow extends StatelessWidget {
               onPressed: onPressed,
               icon: Image.asset(
                 "assets/img/next_go.png",
-                width: 20,
-                height: 20,
+                width: 30,
+                height: 30,
                 fit: BoxFit.contain,
               ))
         ],
